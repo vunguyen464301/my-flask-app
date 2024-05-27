@@ -1,0 +1,46 @@
+# virtual environment
+__pycache__/
+venv/
+env/  # Optional, if using a different virtual env name
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller / cx_Freeze
+build/
+dist/
+eggs/
+*.spec
+
+# IDE / text editor
+*.idea/
+.vscode/
+.spyderproject/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.pytest_cache/
+
+# OS specific
+# (adjust based on your OS)
+*.DS_Store
