@@ -1,28 +1,39 @@
 from flask import Flask, request
-from modules.database.sqlServer import dbConnection
-
-# from modules.course import course
-from modules.student.student import studentController
+from flask_restx import Api, fields, Resource, Namespace
+from modules.student import studentModuleView
 
 app = Flask(__name__)
 
+helloNs = Namespace("hello", description="Hello World operation")
+helloModel = helloNs.model(
+    "HelloModel",
+    {"message": fields.String(required=True, description="Hello message")},
+)
 
-@app.route("/")
-def hello_world():
-    return "Hello, World!"
+
+@helloNs.route("/")
+@helloNs.response(200, "Success", helloModel)
+class HelloWorld(Resource):
+    @helloNs.response(200, "Success", helloModel)
+    def get(self):
+        """
+        Get a hello world message
+        """
+        return {"message": "Hello, World!"}
 
 
-# Sample route to test database connection
 @app.route("/connection")
 def index():
-    cursor = dbConnection.cursor()
-    cursor.execute("SELECT @@version")
-    row = cursor.fetchone()
-    return f"Connected to SQL Server. Server version: {row[0]}"
+    # cursor = dbConnection.cursor()
+    # cursor.execute("SELECT @@version")
+    # row = cursor.fetchone()
+    # return f"Connected to SQL Server. Server version: {row[0]}"
+    return "not ok"
 
 
-# course()
-app.register_blueprint(studentController)
+app.register_blueprint(studentModuleView)
+api = Api(app)
+api.add_namespace(helloNs)
 
 
 if __name__ == "__main__":
