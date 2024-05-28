@@ -12,15 +12,26 @@ class DatabaseConnection:
 
     @staticmethod
     def _create_connection():
-        # Database connection configuration
-        server = "your_server_name"  # replace with your SQL Server hostname
-        database = "your_database_name"  # replace with your database name
-        username = "your_username"  # replace with your database username
-        password = "your_password"  # replace with your database password
 
-        # Create a connection to the database
-        conn_str = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
-        return pyodbc.connect(conn_str)
+        try:
+            # Database connection configuration
+            server = "localhost"  # replace with your SQL Server hostname
+            database = "QL_BANHANG"  # replace with your database name
+            username = "sa"  # replace with your database username
+            password = "root@123456"  # replace with your database password
+
+            # # Create a connection to the database
+            conn_str = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+
+            # Attempt to establish a connection to the database
+            conn = pyodbc.connect(conn_str)
+            print("Connected to SQL Server successfully")
+            return conn
+
+        except pyodbc.Error as ex:
+            # Handle connection errors
+            print("Error connecting to SQL Server:", ex)
+            return None
 
     @property
     def connection(self):

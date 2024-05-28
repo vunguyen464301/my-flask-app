@@ -44,3 +44,5 @@ htmlcov/
 # OS specific
 # (adjust based on your OS)
 *.DS_Store
+
+_venv/
